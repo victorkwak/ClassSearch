@@ -1,1 +1,4 @@
 .idea
+*.iml
+.ipynb_checkpoints
+/data/cs_subs.csv
