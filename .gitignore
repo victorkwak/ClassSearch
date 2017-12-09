@@ -1,4 +1,6 @@
 .idea
 *.iml
 .ipynb_checkpoints
-/data/cs_subs.csv
+data/cs_subs.csv
+data/reddit*
+models/fasttext.bin
