@@ -5,11 +5,13 @@
 <h1>CS410 Project - Vertical Search Engine</h1>
 <h2>Sub-reddit post title classifier.</h2>
 <h3>Enter reddit post title:</h3>
-<form action="/plot.png" method="POST">
+<form action="/plot_chart" method="GET">
     <input name="post_title">
     <input type="submit">
 </form>
-
+<div>
+<img src="data:image/png;base64,{{chart}}" alt="">
+</div>
 <h3>Exposed API:</h3>
 <p>
 classify_this_post_api:
