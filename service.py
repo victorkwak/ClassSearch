@@ -7,9 +7,6 @@ import fastText as fasttext
 from fastText import load_model
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import io, base64
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
 
 class Classifier(object):
     def __init__(self):
@@ -21,9 +18,6 @@ class Classifier(object):
         labels = list(map(lambda x: int(x.strip('__label__')), labels))
         labels = self.encoder.inverse_transform(labels).tolist()
         return dict(zip(*(labels,values)))
-        js = json.dumps(data)
-        resp = Response(js, status=200, mimetype='application/json')
-        return resp
 
 app = Flask(__name__)
 classifier = Classifier()
@@ -32,26 +26,24 @@ classifier = Classifier()
 def index():
     return render_template('classify.html')
 
-@app.route('/plot.png', methods=['POST'])
-def plot():
-    try:
-        post_title = request.form['post_title']
-    except KeyError:
-        return ("BAD-FORM, 'post_title' NOT FOUND", 400)
-    data = classifier.predict(post_title)
+@app.route('/plot_chart', methods=['GET'])
+def plot_chart():
+    data = classifier.predict(str(request.data))
     labels = list(data.keys())
     values = list(data.values())
     y_pos = np.arange(len(labels))
-    plt.barh(y_pos, values, align='center', alpha=0.9)
+    plt.barh(y_pos, values, color='#347cef')
     plt.yticks(y_pos, labels)
     plt.xlabel('Probability')
     plt.title('Sub-reddits')
     plt.tight_layout()
     output = io.BytesIO()
     plt.savefig(output)
-    response = make_response(output.getvalue())
-    response.mimetype = 'image/png'
-    return response
+    #response = make_response(output.getvalue())
+    #response.mimetype = 'image/png'
+    plot_url = base64.b64encode(output.getvalue()).decode()
+    #https://stackoverflow.com/questions/20836766/how-do-i-remove-broken-image-box
+    return render_template('classify.html', chart=plot_url)
 
 @app.route('/classify_this_post_api',methods=['POST'])
 def classify_this_post_api():
@@ -62,7 +54,6 @@ def classify_this_post_api():
     data = classifier.predict(str(post_title))
     js = json.dumps(data)
     return Response(js, status=200, mimetype='application/json')
-
 
 if __name__ == '__main__':
     #don't use debug since it would create 2 schedulers due to reload functionality
