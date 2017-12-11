@@ -28,7 +28,8 @@ def index():
 
 @app.route('/plot_chart', methods=['GET'])
 def plot_chart():
-    data = classifier.predict(str(request.data))
+    post_title = request.args['post_title']
+    data = classifier.predict(str(post_title))
     labels = list(data.keys())
     values = list(data.values())
     y_pos = np.arange(len(labels))
