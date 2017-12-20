@@ -3,6 +3,6 @@
 .ipynb_checkpoints
 data/cs_subs.csv
 data/reddit*
-models/fasttext.bin
+models/*
 .DS_Store
 data/.DS_Store
