@@ -15,3 +15,12 @@ SELECT title, score, subreddit
 FROM [fh-bigquery:reddit_posts.2017_10], [fh-bigquery:reddit_posts.2017_09]
 WHERE subreddit IN ("dailyprogrammer", "docker")
 ```
+Docker commands:
+```linux
+sudo docker build -t flask-cs410:latest . 
+sudo docker run -p 5000:5000 flask-cs410
+
+or 
+
+sudo docker run -d -p 5000:5000 flask-cs410
+```
