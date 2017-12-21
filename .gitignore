@@ -2,6 +2,7 @@
 *.iml
 .ipynb_checkpoints
 data/cs_subs.csv
+data/cs_subs_*
 data/reddit*
 models/*
 .DS_Store

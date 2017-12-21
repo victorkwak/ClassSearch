@@ -12,6 +12,10 @@ import fastText
 from gensim import utils
 
 
+"""
+Stopwords from Scikit-learn's repository: 
+https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/feature_extraction/stop_words.py
+"""
 ENGLISH_STOP_WORDS = frozenset([
     "a", "about", "above", "across", "after", "afterwards", "again", "against",
     "all", "almost", "alone", "along", "already", "also", "although", "always",
@@ -55,7 +59,21 @@ ENGLISH_STOP_WORDS = frozenset([
     "within", "without", "would", "yet", "you", "your", "yours", "yourself",
     "yourselves"])
 
+
 def format_for_fastext(X, y, filename):
+    """
+    By default, FastText looks for text data in the following format:
+
+    __label__0 <text>
+    __label__0 <text>
+    __label__1 <text>
+    ...
+
+    This function will take text data and labels (X, y) and format it for
+    FastText consumption. The formatted text is then saved to a specified file
+    in the "data" directory. Should work with iterable data structures such as
+    pandas sequences, numpy arrays, and Python lists.
+    """
     prefix = '__label__'
     f = open(''.join(['data/', filename]), 'w')
     for title, label in zip(X, y):
@@ -66,7 +84,12 @@ def format_for_fastext(X, y, filename):
         f.write(string)
     f.close()
 
+
 def test_fasttext(y, X, classifier, n=1):
+    """
+    Returns the top N accuracy for the classifier i.e., if the correct label is
+    within the top N most likely labels according to the classifier.
+    """
     match = []
     for true, string in zip(y, X):
         predictions = list(classifier.predict(string, n)[0])
@@ -74,6 +97,7 @@ def test_fasttext(y, X, classifier, n=1):
             predictions[i] = int(predictions[i].split('__label__')[1])
         match.append(int(true in predictions))
     return np.array(match)
+
 
 print('Importing data...')
 data = pd.read_csv('data/cs_subs.csv').dropna().drop_duplicates()
