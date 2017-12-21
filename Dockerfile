@@ -12,11 +12,11 @@ WORKDIR /app/fastText
 RUN pip install pybind11
 RUN apt-get install python-sklearn -y  
 RUN python setup.py install
-WORKDIR /app
-RUN mkdir models
-WORKDIR /app/models
-RUN wget https://www.dropbox.com/s/5k5vket88csvn5i/fasttext.bin
+WORKDIR /app/data
+RUN tar -xzf cs_subs.csv.tar.gz
 WORKDIR /app
 RUN pip install -r requirements.txt
+RUN mkdir models
+RUN python build_model.py
 ENTRYPOINT ["python"]
 CMD ["app.py"]
