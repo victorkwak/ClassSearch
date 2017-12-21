@@ -1,6 +1,12 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+if int(sys.version[0]) == 3:
+    from sklearn.model_selection import train_test_split
+elif int(sys.version[0]) == 2:
+    from sklearn.cross_validation import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import fastText
 from gensim import utils
