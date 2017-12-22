@@ -18,7 +18,7 @@ WHERE subreddit IN ("dailyprogrammer", "docker")
 ## Documenation:
 
 #### Summary
-The following API is a demo of how to use Facebook’s Fasttext to create your own model, in this case we’ve used a dataset containing sub-reddit categories and post titles. We trained the model on this dataset and achieved a ~80% accuracy, this can be useful for developers if they want to recommend users a category for their post, review, complaint, feedback, etc… so the user doesn’t have to choose one.
+The idea of ClassSearch is to use a text classifier's prediction probabilities to implement a vertical search engine. The following API is a demo of how to use Facebook’s [fastText](https://github.com/facebookresearch/fastText) to create your own model and serve it on a REST API on Flask for this purpose. In this case we’ve used a year's worth of computer science-related subreddit categories and post titles. We chose this data as it serves as a good example of what ClassSearch can achieve: classifications of searches to documents. In a search engine, the first search result doesn't always need to be what the user is looking for. They can be a few below that and the experience is still good enough. In this demo, we trained a text classier using fastTExt and achieved a top 10 ~78% accuracy on 117 categories and 84% top 10 accuracy using a tuned fastText model on Keras. For simplicity, this demo uses the former. We belive this concept can be useful for other things as well such as if developers want to recommend users a category for their post, review, complaint, feedback, etc… so the user doesn’t have to choose one.
 
 ##### Authors:
 - Victor Kwak - Created Jupyter Notebooks and Models
