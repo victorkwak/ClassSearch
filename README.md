@@ -4,7 +4,8 @@
 * [StarSpace: Embed All The Things!](https://research.fb.com/publications/starspace-embed-all-the-things/)
 * [Word2Vec Paper](https://arxiv.org/pdf/1301.3781.pdf)
 * [A Comparative Study of Word Embeddings for Reading Comprehension](https://arxiv.org/pdf/1703.00993.pdf)
-* [FastText Paper](https://arxiv.org/pdf/1607.01759.pdf)
+* [FastText Classifier Paper](https://arxiv.org/pdf/1607.01759.pdf)
+* [Embeddings using Subword Information](https://arxiv.org/abs/1607.04606)
 
 ## Data
 [Reddit Posts Data](https://bigquery.cloud.google.com/dataset/fh-bigquery:reddit_posts?pli=1)
